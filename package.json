@@ -1,0 +1,49 @@
+{
+  "name": "@selfagency/skills",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Self Agency's LLM agent skills",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky || true && skills-npm --yes",
+    "lint:md": "rumdl check --fix . --exclude node_modules",
+    "lint:ts": "oxlint --fix .",
+    "format:md": "rumdl fmt . --exclude node_modules",
+    "format:ts": "oxfmt --no-error-on-unmatched-pattern .",
+    "skills:sync": "skills-npm --yes",
+    "skills:sync:dry": "skills-npm --dry-run --yes"
+  },
+  "lint-staged": {
+    "*.{md,markdown,mdown,mkdn,mdx}": [
+      "rumdl check --fix",
+      "rumdl fmt"
+    ],
+    "*.{ts,tsx,mts,cts}": [
+      "oxlint --fix",
+      "oxfmt --no-error-on-unmatched-pattern"
+    ]
+  },
+  "keywords": [
+    "agents",
+    "skills",
+    "llm",
+    "agentic",
+    "agentskills",
+    "skills-npm",
+    "skills.sh",
+    "agentskills.io"
+  ],
+  "author": "Daniel Sieradski <daniel@self.agency>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.0",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.45.0",
+    "oxlint": "^1.60.0",
+    "rumdl": "^0.1.74",
+    "skills-npm": "^1.1.1",
+    "typescript": "^6.0.3"
+  }
+}
