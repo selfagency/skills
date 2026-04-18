@@ -1,0 +1,79 @@
+skills/astro/references/module-routing.md
+  h_5cf1e2c1161853 1-70
+skills/astro/references/project-structure.md
+  h_5cf1e2c1161853 1-135
+skills/astro/references/module-deployment.md
+  h_5cf1e2c1161853 1-50
+skills/astro/references/astro-config.md
+  h_5cf1e2c1161853 1-175
+skills/astro/references/routing-patterns.md
+  h_5cf1e2c1161853 1-52
+skills/astro/references/server-islands.md
+  h_5cf1e2c1161853 1-41
+package.json
+  b45204a047f7e3c4 15
+  h_5cf1e2c1161853 9
+skills/astro/references/module-components.md
+  h_5cf1e2c1161853 1-92
+skills/astro/references/module-content.md
+  h_5cf1e2c1161853 1-61
+skills/astro/references/content-collections.md
+  h_5cf1e2c1161853 1-59
+skills/astro/references/markdown-mdx.md
+  h_5cf1e2c1161853 1-46
+skills/astro/references/ssr-and-endpoints.md
+  h_5cf1e2c1161853 1-55
+skills/astro/references/official-integrations.md
+  h_5cf1e2c1161853 1-46
+skills/astro/references/client-directives.md
+  h_5cf1e2c1161853 1-63
+README.md
+  h_5cf1e2c1161853 1-39
+skills/astro/references/module-islands.md
+  h_5cf1e2c1161853 1-59
+skills/astro/references/module-integrations.md
+  h_5cf1e2c1161853 1-52
+skills/astro/references/adapters.md
+  h_5cf1e2c1161853 1-34
+skills/astro/SKILL.md
+  h_5cf1e2c1161853 1-150
+skills/astro/references/framework-components.md
+  h_5cf1e2c1161853 1-37
+skills/astro/references/build-and-env.md
+  h_5cf1e2c1161853 1-45
+skills/astro/references/starwind-components.md
+  h_5cf1e2c1161853 1-179
+skills/astro/references/styling-patterns.md
+  h_5cf1e2c1161853 1-173
+skills/astro/references/module-starwind.md
+  h_5cf1e2c1161853 1-51
+skills/astro/references/component-syntax.md
+  h_5cf1e2c1161853 1-177
+skills/astro/evals/evals.json
+  h_5cf1e2c1161853 1-214
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "c64dd42f3aedb60dff7a3f80cba49705d924a355",
+  "prompts": {
+    "b45204a047f7e3c4": {
+      "agent_id": {
+        "tool": "github-copilot-tab",
+        "id": "ai_tab-1776534614934",
+        "model": "default"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
