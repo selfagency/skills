@@ -6,13 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky || true && skills-npm --yes",
+    "prepare": "husky || true && pnpx skills-npm --yes",
     "lint:md": "rumdl check --fix . --exclude node_modules",
     "lint:ts": "oxlint --fix .",
     "format:md": "rumdl fmt . --exclude node_modules",
     "format:ts": "oxfmt --no-error-on-unmatched-pattern .",
-    "skills:sync": "skills-npm --yes",
-    "skills:sync:dry": "skills-npm --dry-run --yes"
+    "skills:sync": "pnpx skills-npm --yes",
+    "skills:sync:dry": "pnpx skills-npm --dry-run --yes"
   },
   "lint-staged": {
     "*.{md,markdown,mdown,mkdn,mdx}": [
@@ -43,7 +43,6 @@
     "oxfmt": "^0.45.0",
     "oxlint": "^1.60.0",
     "rumdl": "^0.1.74",
-    "skills-npm": "^1.1.1",
     "typescript": "^6.0.3"
   }
 }

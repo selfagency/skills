@@ -1,0 +1,214 @@
+{
+  "skill_name": "astro",
+  "evals": [
+    {
+      "id": "astro-project-structure",
+      "prompt": "What files do I need to create for a new Astro 6 blog with Markdown posts, a home page, an about page, and an RSS feed?",
+      "expected_output": "A list of files with paths including src/pages/index.astro, src/pages/about.astro, src/pages/blog/[...id].astro, src/pages/rss.xml.ts, src/content.config.ts, and astro.config.mjs.",
+      "assertions": [
+        "Lists src/pages/index.astro and src/pages/about.astro",
+        "Lists a dynamic blog route using [...id] or [slug]",
+        "Lists src/content.config.ts for collection definition",
+        "Lists astro.config.mjs",
+        "Mentions RSS endpoint as a .ts file",
+        "Mentions site: config is required for RSS"
+      ]
+    },
+    {
+      "id": "astro-sub-skill-routing",
+      "prompt": "I want to build an Astro site with React components that need to be interactive, blog posts from Markdown files, and deployment on Cloudflare. Which Astro skills should I use?",
+      "expected_output": "Identifies the relevant sub-skills: astro-islands for React hydration, astro-content for Markdown collections, astro-integrations for adding React and Cloudflare adapter, astro-deployment for Cloudflare config.",
+      "assertions": [
+        "Mentions astro-islands for interactive React components",
+        "Mentions astro-content for Markdown blog posts",
+        "Mentions astro-integrations for astro add react and cloudflare",
+        "Mentions astro-deployment for output mode and adapter config",
+        "Notes Cloudflare adapter requires v13+ for Astro 6"
+      ]
+    },
+    {
+      "id": "astro-config-basics",
+      "prompt": "Set up astro.config.mjs for a site at https://mysite.com with React support, deployed on Cloudflare in server mode, with a secret DATABASE_URL env var.",
+      "expected_output": "astro.config.mjs with site, output: 'server', cloudflare adapter, react integration, and astro:env schema for DATABASE_URL.",
+      "assertions": [
+        "site: 'https://mysite.com' is set",
+        "output: 'server' is set",
+        "cloudflare adapter is configured",
+        "react() is in integrations",
+        "DATABASE_URL uses envField.string with context: 'server', access: 'secret'",
+        "Imports envField from 'astro/config'"
+      ]
+    },
+    {
+      "id": "astro-v6-migration",
+      "prompt": "I'm migrating from Astro 4 to Astro 6. What are the key breaking changes for content collections?",
+      "expected_output": "Lists: content config moved to src/content.config.ts, loaders replace legacy directory-based approach, glob()/file() from astro/loaders, z from astro/zod, render() standalone import.",
+      "assertions": [
+        "Mentions src/content.config.ts (not src/content/config.ts)",
+        "Mentions glob() and file() from 'astro/loaders'",
+        "Mentions z must come from 'astro/zod'",
+        "Mentions render() is imported from 'astro:content' (not a method on entries)",
+        "Mentions Cloudflare adapter v13+ if applicable"
+      ]
+    },
+    {
+      "id": "components-basic-props",
+      "prompt": "Create an Astro component called PriceTag that accepts a `price` number and an optional `currency` string (default 'USD'), and renders them in a <span>.",
+      "expected_output": "An .astro file with a typed Props interface, destructuring with default value, and a template rendering price and currency.",
+      "assertions": [
+        "Uses interface Props with price: number and currency?: string",
+        "Destructures with default: const { price, currency = 'USD' } = Astro.props",
+        "Template renders both values in a span or similar element"
+      ]
+    },
+    {
+      "id": "components-named-slots",
+      "prompt": "Create an Astro Card layout component with three named slots: header, body, and footer. The footer slot should have fallback content '© 2025'.",
+      "expected_output": "An .astro file using <slot name='header'/>, <slot name='body'/>, and <slot name='footer'>© 2025</slot>.",
+      "assertions": [
+        "Has three named slots: header, body, footer",
+        "Footer slot includes fallback text content",
+        "No unnecessary wrappers; semantic HTML structure"
+      ]
+    },
+    {
+      "id": "components-class-list",
+      "prompt": "Create a Button component that accepts variant ('primary' | 'secondary') and disabled boolean props, uses class:list to apply Tailwind classes conditionally.",
+      "expected_output": "Uses class:list directive with conditional classes based on variant and disabled props.",
+      "assertions": [
+        "Uses class:list directive",
+        "Conditionally applies classes based on variant prop",
+        "Applies disabled classes when disabled is true",
+        "Has TypeScript Props interface"
+      ]
+    },
+    {
+      "id": "islands-directive-choice",
+      "prompt": "I have a React chart component that visualizes analytics data at the bottom of a dashboard page. Which hydration directive should I use and why?",
+      "expected_output": "client:visible is the right choice because it only hydrates when the component scrolls into view, saving resources for below-the-fold content.",
+      "assertions": [
+        "Recommends client:visible",
+        "Explains that client:idle or client:load would waste resources on below-fold content",
+        "Optionally mentions rootMargin option to pre-hydrate before visible"
+      ]
+    },
+    {
+      "id": "islands-server-defer",
+      "prompt": "Create a server island for a CartCount component that reads from session storage and shows a loading skeleton as fallback.",
+      "expected_output": "A page component using server:defer with a slot='fallback', and a CartCount.astro component that reads from Astro.locals.session.",
+      "assertions": [
+        "Uses server:defer directive on the CartCount component",
+        "Includes a slot='fallback' with skeleton/placeholder content",
+        "CartCount.astro accesses Astro.locals.session or Astro.cookies",
+        "Component is an .astro file, not a framework component"
+      ]
+    },
+    {
+      "id": "routing-dynamic-blog",
+      "prompt": "Create a static Astro page at src/pages/blog/[slug].astro that generates one page per blog post from a 'blog' content collection, rendering the post title and content.",
+      "expected_output": "An .astro file with getStaticPaths() calling getCollection('blog'), mapping entries to params/props, and a template using render() + <Content />.",
+      "assertions": [
+        "Exports getStaticPaths()",
+        "Calls getCollection('blog') inside getStaticPaths",
+        "Maps posts to { params: { slug: post.id }, props: { post } }",
+        "Calls render(post) and renders <Content />",
+        "Imports from 'astro:content'"
+      ]
+    },
+    {
+      "id": "routing-api-endpoint",
+      "prompt": "Create an SSR API endpoint at src/pages/api/products/[id].ts that returns a product as JSON, or 404 if not found.",
+      "expected_output": "A TypeScript endpoint file with export const prerender = false, a GET handler, 404 response for missing products, and proper Content-Type header.",
+      "assertions": [
+        "Uses export const prerender = false",
+        "Exports GET function with APIRoute type",
+        "Returns 404 Response when product not found",
+        "Returns JSON with Content-Type: application/json"
+      ]
+    },
+    {
+      "id": "content-collection-setup",
+      "prompt": "Set up a 'blog' content collection in Astro 6 for Markdown files in src/data/blog/. Each post should have a required title (string), pubDate (date), optional description (string), and optional draft (boolean, default false).",
+      "expected_output": "A src/content.config.ts file using defineCollection with glob() loader and Zod schema. Imports z from 'astro/zod' and glob from 'astro/loaders'.",
+      "assertions": [
+        "File is src/content.config.ts",
+        "Imports defineCollection from 'astro:content'",
+        "Imports glob from 'astro/loaders'",
+        "Imports z from 'astro/zod' (not from 'zod')",
+        "Uses glob({ pattern: '**/*.md', base: './src/data/blog' }) or similar",
+        "Schema has title: z.string(), pubDate: z.coerce.date()",
+        "draft uses .default(false)",
+        "Exports collections object"
+      ]
+    },
+    {
+      "id": "content-live-collection",
+      "prompt": "Set up a live product collection that fetches from an API at request time, with a Zod schema validating id (string), name (string), and price (number).",
+      "expected_output": "src/live.config.ts using defineLiveCollection with a custom loader and Zod schema.",
+      "assertions": [
+        "File is src/live.config.ts",
+        "Uses defineLiveCollection from 'astro:content'",
+        "Schema has id, name, price fields using z from 'astro/zod'",
+        "Notes that getLiveCollection/getLiveEntry must be used, not getCollection",
+        "Notes export const prerender = false is needed on pages"
+      ]
+    },
+    {
+      "id": "integrations-ssr-adapter",
+      "prompt": "Configure the Astro project for server-side rendering on Cloudflare Workers using the official adapter.",
+      "expected_output": "Updated astro.config.mjs with output: 'server' and cloudflare adapter from @astrojs/cloudflare. Mentions Astro 6 requires adapter v13+.",
+      "assertions": [
+        "output: 'server' is set",
+        "Imports cloudflare from '@astrojs/cloudflare'",
+        "adapter: cloudflare() is in the config",
+        "Mentions wrangler.jsonc or cloudflare deploy setup"
+      ]
+    },
+    {
+      "id": "deployment-cloudflare-ssr",
+      "prompt": "Configure an Astro 6 project for SSR deployment on Cloudflare Workers. Include Cloudflare KV binding for sessions and a DATABASE_URL environment variable that's server-only.",
+      "expected_output": "astro.config.mjs with cloudflare adapter (v13+), output: 'server', sessionKVBindingName, wrangler.jsonc with KV binding, and astro:env schema for DATABASE_URL.",
+      "assertions": [
+        "output: 'server' is set",
+        "Uses '@astrojs/cloudflare' adapter",
+        "Includes sessionKVBindingName in adapter config",
+        "Shows wrangler.jsonc KV namespace config",
+        "DATABASE_URL is in astro:env schema with context: 'server', access: 'secret'",
+        "Uses envField from 'astro/config'"
+      ]
+    },
+    {
+      "id": "starwind-init-and-add",
+      "prompt": "Set up Starwind UI in an Astro project and add button and dialog components.",
+      "expected_output": "Shows Starwind CLI initialization and component-add commands, and explains that components are added as local source files.",
+      "assertions": [
+        "Uses starwind init command",
+        "Uses starwind add command with button and dialog",
+        "Mentions import path '@/components/starwind/*'",
+        "Mentions Starwind components are copied into the project"
+      ]
+    },
+    {
+      "id": "starwind-import-pattern",
+      "prompt": "Show how to use Starwind Tooltip with a Button trigger in Astro.",
+      "expected_output": "Uses compound component pattern with Tooltip, TooltipTrigger, TooltipContent and imports from '@/components/starwind/*'.",
+      "assertions": [
+        "Imports Button from '@/components/starwind/button'",
+        "Imports Tooltip components from '@/components/starwind/tooltip'",
+        "Uses Tooltip > TooltipTrigger > TooltipContent structure",
+        "Uses valid Astro component syntax"
+      ]
+    },
+    {
+      "id": "starwind-theme-guidance",
+      "prompt": "How should I customize Starwind component colors and support dark mode?",
+      "expected_output": "Advises using Starwind CSS variables/tokens and `.dark` class strategy instead of ad-hoc hardcoded colors.",
+      "assertions": [
+        "Mentions CSS variables for theming",
+        "Mentions dark mode via .dark class",
+        "Discourages hardcoded direct colors",
+        "Preserves accessibility behavior when customizing"
+      ]
+    }
+  ]
+}
