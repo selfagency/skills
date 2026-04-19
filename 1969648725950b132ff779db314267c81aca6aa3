@@ -1,0 +1,14 @@
+skills/coolify/references/concepts.md
+  h_5cf1e2c1161853 28,49,68,85,118,175
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "1969648725950b132ff779db314267c81aca6aa3",
+  "prompts": {},
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
