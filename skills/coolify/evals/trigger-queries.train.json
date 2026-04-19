@@ -1,0 +1,58 @@
+[
+  {
+    "query": "redeploy my-api on coolify and check why it keeps failing health checks",
+    "should_trigger": true
+  },
+  {
+    "query": "what's unhealthy across my self-hosted infra right now?",
+    "should_trigger": true
+  },
+  {
+    "query": "restart postgres in staging and confirm the app can connect again",
+    "should_trigger": true
+  },
+  {
+    "query": "set DATABASE_URL for my coolify app and trigger a new deployment",
+    "should_trigger": true
+  },
+  {
+    "query": "list who has access to my coolify instance",
+    "should_trigger": true
+  },
+  {
+    "query": "check deployment logs for app-123 in coolify and cancel the stuck one",
+    "should_trigger": true
+  },
+  {
+    "query": "create a staging environment in my coolify project and deploy from docker image",
+    "should_trigger": true
+  },
+  {
+    "query": "open a GitHub pull request for this branch and request reviews",
+    "should_trigger": false
+  },
+  {
+    "query": "write a docker-compose file for a local redis and postgres dev setup",
+    "should_trigger": false
+  },
+  {
+    "query": "help me debug a kubernetes deployment in EKS",
+    "should_trigger": false
+  },
+  {
+    "query": "create a jira ticket for failed deploy",
+    "should_trigger": false
+  },
+  {
+    "query": "generate a terraform module for ECS service deployment",
+    "should_trigger": false
+  },
+  {
+    "query": "optimize this SQL query for our analytics warehouse",
+    "should_trigger": false
+  },
+  {
+    "query": "find all open pull requests that mention deployment failures",
+    "should_trigger": false
+  }
+]

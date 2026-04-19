@@ -1,0 +1,42 @@
+[
+  {
+    "query": "coolify cloud staging is unhealthy after redeploy, diagnose and recover it",
+    "should_trigger": true
+  },
+  {
+    "query": "validate this coolify server and show me what resources are on it",
+    "should_trigger": true
+  },
+  {
+    "query": "deploy from docker image to my coolify project",
+    "should_trigger": true
+  },
+  {
+    "query": "rotate credentials in coolify private keys and re-check access",
+    "should_trigger": true
+  },
+  {
+    "query": "set DATABASE_URL in coolify for billing-api and restart it",
+    "should_trigger": true
+  },
+  {
+    "query": "scan my coolify infra and prioritize unhealthy services",
+    "should_trigger": true
+  },
+  {
+    "query": "summarize release notes from the last 5 git tags",
+    "should_trigger": false
+  },
+  {
+    "query": "set up github actions to build and push a docker image",
+    "should_trigger": false
+  },
+  {
+    "query": "debug why my kubernetes ingress returns 502",
+    "should_trigger": false
+  },
+  {
+    "query": "create a new github app integration for this repository",
+    "should_trigger": false
+  }
+]
