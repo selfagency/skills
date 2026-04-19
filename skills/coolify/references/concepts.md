@@ -24,13 +24,13 @@ MCP identifiers: resources are addressed by UUID. `diagnose_app` and `diagnose_s
 
 ## Build packs
 
-| Build pack | When to use |
-|---|---|
+| Build pack             | When to use                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------- |
 | **Nixpacks** (default) | Auto-detects language/framework; works for most Node, Python, Ruby, Go, PHP apps |
-| **Static** | Pre-built files; serves via Nginx. Set `Publish Directory` (e.g. `dist`). |
-| **Dockerfile** | Full image control; use your own Dockerfile |
-| **Docker Compose** | Multi-service apps; Coolify wraps and proxies the compose network |
-| **Docker Image** | Deploy a pre-built image from a registry |
+| **Static**             | Pre-built files; serves via Nginx. Set `Publish Directory` (e.g. `dist`).        |
+| **Dockerfile**         | Full image control; use your own Dockerfile                                      |
+| **Docker Compose**     | Multi-service apps; Coolify wraps and proxies the compose network                |
+| **Docker Image**       | Deploy a pre-built image from a registry                                         |
 
 Key build pack config fields:
 
@@ -45,16 +45,16 @@ Key build pack config fields:
 
 Coolify auto-generates dynamic values using `SERVICE_<TYPE>_<IDENTIFIER>` syntax.
 
-| Syntax | Generates |
-|---|---|
-| `SERVICE_URL_<ID>` | URL from wildcard domain: `http://app-abc.example.com` |
-| `SERVICE_URL_<ID>_3000` | URL proxied to port 3000 |
-| `SERVICE_URL_<ID>=/api` | URL with path appended |
-| `SERVICE_FQDN_<ID>` | FQDN only (no scheme) |
-| `SERVICE_USER_<ID>` | Random 16-char string (use as username) |
-| `SERVICE_PASSWORD_<ID>` | Strong random password |
-| `SERVICE_PASSWORD_64_<ID>` | 64-bit random password |
-| `SERVICE_BASE64_<ID>` | Base64-encoded random string |
+| Syntax                     | Generates                                              |
+| -------------------------- | ------------------------------------------------------ |
+| `SERVICE_URL_<ID>`         | URL from wildcard domain: `http://app-abc.example.com` |
+| `SERVICE_URL_<ID>_3000`    | URL proxied to port 3000                               |
+| `SERVICE_URL_<ID>=/api`    | URL with path appended                                 |
+| `SERVICE_FQDN_<ID>`        | FQDN only (no scheme)                                  |
+| `SERVICE_USER_<ID>`        | Random 16-char string (use as username)                |
+| `SERVICE_PASSWORD_<ID>`    | Strong random password                                 |
+| `SERVICE_PASSWORD_64_<ID>` | 64-bit random password                                 |
+| `SERVICE_BASE64_<ID>`      | Base64-encoded random string                           |
 
 Use these in compose `environment:` stanzas. Values stay consistent across all services in a stack.
 
@@ -64,16 +64,16 @@ Use these in compose `environment:` stanzas. Values stay consistent across all s
 
 Coolify injects these automatically (opt-in by referencing them):
 
-| Variable | Value |
-|---|---|
-| `COOLIFY_FQDN` | App FQDN(s) |
-| `COOLIFY_URL` | App URL(s) |
-| `COOLIFY_BRANCH` | Git branch |
-| `COOLIFY_RESOURCE_UUID` | Resource UUID |
-| `COOLIFY_CONTAINER_NAME` | Container name |
-| `SOURCE_COMMIT` | Git commit hash (must enable "Include Source Commit in Build") |
-| `PORT` | Defaults to first port in Port Exposes |
-| `HOST` | Defaults to `0.0.0.0` |
+| Variable                 | Value                                                          |
+| ------------------------ | -------------------------------------------------------------- |
+| `COOLIFY_FQDN`           | App FQDN(s)                                                    |
+| `COOLIFY_URL`            | App URL(s)                                                     |
+| `COOLIFY_BRANCH`         | Git branch                                                     |
+| `COOLIFY_RESOURCE_UUID`  | Resource UUID                                                  |
+| `COOLIFY_CONTAINER_NAME` | Container name                                                 |
+| `SOURCE_COMMIT`          | Git commit hash (must enable "Include Source Commit in Build") |
+| `PORT`                   | Defaults to first port in Port Exposes                         |
+| `HOST`                   | Defaults to `0.0.0.0`                                          |
 
 ---
 
@@ -81,16 +81,16 @@ Coolify injects these automatically (opt-in by referencing them):
 
 Supported via `database` tool with `type` param:
 
-| Type | Notes |
-|---|---|
-| `postgresql` | Most common; full backup support |
-| `mysql` | |
-| `mariadb` | |
-| `mongodb` | |
-| `redis` | |
-| `keydb` | Redis-compatible, multi-threaded |
-| `clickhouse` | Columnar analytics |
-| `dragonfly` | Redis-compatible, high-throughput |
+| Type         | Notes                             |
+| ------------ | --------------------------------- |
+| `postgresql` | Most common; full backup support  |
+| `mysql`      |                                   |
+| `mariadb`    |                                   |
+| `mongodb`    |                                   |
+| `redis`      |                                   |
+| `keydb`      | Redis-compatible, multi-threaded  |
+| `clickhouse` | Columnar analytics                |
+| `dragonfly`  | Redis-compatible, high-throughput |
 
 Database SSL: auto-cert generation available per-database. Databases do not support domain configuration.
 
@@ -114,11 +114,11 @@ Domain format: FQDN with scheme (`https://coolify.io`). Multiple domains comma-s
 
 ## Git integration options
 
-| Method | Best for |
-|---|---|
-| **GitHub App** | GitHub repos; automatic webhooks, PR deployments, commit status |
-| **Deploy Keys** | Any Git provider; SSH-based, universal, works air-gapped |
-| **Public URL** | Public repos only; no auth needed |
+| Method          | Best for                                                        |
+| --------------- | --------------------------------------------------------------- |
+| **GitHub App**  | GitHub repos; automatic webhooks, PR deployments, commit status |
+| **Deploy Keys** | Any Git provider; SSH-based, universal, works air-gapped        |
+| **Public URL**  | Public repos only; no auth needed                               |
 
 Auto-deploy triggers:
 
@@ -171,11 +171,11 @@ Requires: health check endpoint configured in app settings.
 
 ## Scaling options
 
-| Method | Notes |
-|---|---|
+| Method                     | Notes                                                           |
+| -------------------------- | --------------------------------------------------------------- |
 | **Traditional horizontal** | Deploy same app to multiple servers, use external load balancer |
-| **Docker Swarm** | Multi-node cluster managed by Coolify |
-| **Kubernetes** | Planned, not yet available |
+| **Docker Swarm**           | Multi-node cluster managed by Coolify                           |
+| **Kubernetes**             | Planned, not yet available                                      |
 
 ---
 
