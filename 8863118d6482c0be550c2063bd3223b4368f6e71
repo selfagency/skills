@@ -1,0 +1,60 @@
+skills/1password-secrets-in-code/evals/evals.json
+  h_5cf1e2c1161853 1-111
+skills/1password-secrets-in-code/assets/.env.op.template
+  h_5cf1e2c1161853 1-6
+skills/1password-secrets-in-code/references/mcp-wrapping.md
+  h_5cf1e2c1161853 1-34
+skills/1password-environments/evals/evals.json
+  h_5cf1e2c1161853 1-94
+skills/1password/references/get-started.md
+  h_5cf1e2c1161853 1-28
+skills/1password/references/service-accounts.md
+  h_5cf1e2c1161853 1-28
+skills/1password-ssh/references/git-signing.md
+  h_5cf1e2c1161853 1-36
+skills/1password-secrets-in-code/references/cicd-integration.md
+  h_5cf1e2c1161853 1-31
+skills/1password-ssh/references/ssh-agent.md
+  h_5cf1e2c1161853 1-38
+skills/1password-secrets-in-code/scripts/audit-plaintext-secrets.py
+  h_5cf1e2c1161853 1-142
+skills/1password-secrets-in-code/SKILL.md
+  h_5cf1e2c1161853 1-63
+skills/1password/references/shell-plugins.md
+  h_5cf1e2c1161853 1-18
+skills/1password-environments/assets/.1password/environments.toml.template
+  h_5cf1e2c1161853 1-4
+skills/1password-environments/SKILL.md
+  h_5cf1e2c1161853 1-57
+skills/1password-secrets-in-code/references/sdk-patterns.md
+  h_5cf1e2c1161853 1-28
+skills/1password-environments/references/local-env-file.md
+  h_5cf1e2c1161853 1-27
+skills/1password-ssh/SKILL.md
+  h_5cf1e2c1161853 1-48
+skills/1password/SKILL.md
+  h_5cf1e2c1161853 1-77
+skills/1password/evals/evals.json
+  h_5cf1e2c1161853 1-119
+skills/1password/references/cli-examples.md
+  h_5cf1e2c1161853 1-26
+skills/1password-ssh/references/ssh-forwarding.md
+  h_5cf1e2c1161853 1-36
+skills/cli-admin-automation/evals/description-iterations.json
+  h_5cf1e2c1161853 56
+skills/1password-ssh/evals/evals.json
+  h_5cf1e2c1161853 1-100
+skills/1password-environments/references/agent-hooks.md
+  h_5cf1e2c1161853 1-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "8863118d6482c0be550c2063bd3223b4368f6e71",
+  "prompts": {},
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
