@@ -1,0 +1,328 @@
+{
+  "skill": "zx-shell-scripting",
+  "version": "1.0",
+  "description": "Quality evaluation suite for zx-shell-scripting skill. Tests correctness, completeness, and security of generated zx scripts against baseline (no-skill) responses.",
+  "evaluation_protocol": {
+    "runs_per_case": 3,
+    "comparison_modes": [
+      "with_skill",
+      "without_skill"
+    ],
+    "metrics": [
+      "correctness",
+      "completeness",
+      "security",
+      "idiomatic_zx"
+    ]
+  },
+  "cases": [
+    {
+      "id": "eval-01",
+      "title": "Glob, filter, and transform files",
+      "prompt": "Write a zx script that finds all .log files under a ./logs directory, filters to those containing the string 'ERROR', counts how many error lines each file has, and writes a JSON summary to ./error-report.json.",
+      "categories": [
+        "file-operations",
+        "output-capture"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses glob() to discover log files",
+          "type": "contains",
+          "keywords": [
+            "glob(",
+            "*.log",
+            "logs/"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Uses .nothrow() or try/catch for grep — files without errors would exit non-zero",
+          "type": "contains",
+          "keywords": [
+            "nothrow()",
+            "try",
+            "catch"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Writes JSON output using fs or redirect",
+          "type": "contains",
+          "keywords": [
+            "JSON.stringify",
+            "outputFile",
+            "writeFile",
+            "fs."
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Does NOT add extra quotes around interpolated variables",
+          "type": "must_not_contain",
+          "keywords": [
+            "\"${",
+            "'${"
+          ]
+        },
+        {
+          "id": "a5",
+          "description": "Uses async/await pattern correctly",
+          "type": "contains",
+          "keywords": [
+            "await",
+            "async"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-02",
+      "title": "Parallel HTTP health checks with error handling",
+      "prompt": "Write a zx script that checks the health of three services — https://api.example.com/health, https://auth.example.com/health, and https://db.example.com/health — in parallel. Each check should timeout after 5 seconds. Print a summary showing which are up and which are down, and exit with code 1 if any are down.",
+      "categories": [
+        "parallel-execution",
+        "error-handling",
+        "networking"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses Promise.all() or Promise.allSettled() for parallel execution",
+          "type": "contains",
+          "keywords": [
+            "Promise.all"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Uses .nothrow() so parallel execution doesn't abort on first failure",
+          "type": "contains",
+          "keywords": [
+            "nothrow()"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Applies 5-second timeout per request",
+          "type": "contains",
+          "keywords": [
+            "timeout(",
+            "5000",
+            "5_000"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Exits with code 1 when any check fails",
+          "type": "contains",
+          "keywords": [
+            "process.exit(1)"
+          ]
+        },
+        {
+          "id": "a5",
+          "description": "Checks .ok or .exitCode to determine success/failure",
+          "type": "contains",
+          "keywords": [
+            ".ok",
+            "exitCode"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-03",
+      "title": "System monitor using jc for structured parsing",
+      "prompt": "Write a zx script that uses jc to parse the output of `df -h` and `ps axu`, identifies any filesystem over 80% usage and any process consuming more than 50% CPU, prints warnings for each, and exits with code 1 if any thresholds are exceeded.",
+      "categories": [
+        "jc-integration",
+        "system-monitoring",
+        "conditional-logic"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses jc to parse df and ps output",
+          "type": "contains",
+          "keywords": [
+            "jc --df",
+            "jc --ps",
+            "jc df",
+            "jc ps"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Parses output as JSON using .json()",
+          "type": "contains",
+          "keywords": [
+            ".json()"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Filters filesystems over 80% or compares use_percent",
+          "type": "contains",
+          "keywords": [
+            "80",
+            "use_percent",
+            "parseInt",
+            "parseFloat"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Filters processes over 50% CPU",
+          "type": "contains",
+          "keywords": [
+            "50",
+            "cpu_percent",
+            "pcpu"
+          ]
+        },
+        {
+          "id": "a5",
+          "description": "Exits with code 1 if thresholds exceeded",
+          "type": "contains",
+          "keywords": [
+            "process.exit(1)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-04",
+      "title": "Retry and timeout for flaky deployment command",
+      "prompt": "Write a zx script that deploys an application by running `kubectl rollout status deployment/app`. It should retry up to 5 times with a 3-second delay between attempts. Each attempt should timeout after 30 seconds. If all retries are exhausted, run `kubectl rollout undo deployment/app` as a rollback and exit with code 1.",
+      "categories": [
+        "error-handling",
+        "retry",
+        "timeout"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses retry() with count of 5 and 3 second delay",
+          "type": "contains",
+          "keywords": [
+            "retry(",
+            "3",
+            "3s",
+            "3000"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Applies a 30-second timeout per attempt",
+          "type": "contains",
+          "keywords": [
+            "timeout(",
+            "30000",
+            "30_000",
+            "30s"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Runs rollback command on failure",
+          "type": "contains",
+          "keywords": [
+            "rollout undo",
+            "rollback"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Exits with code 1 on failure",
+          "type": "contains",
+          "keywords": [
+            "process.exit(1)"
+          ]
+        },
+        {
+          "id": "a5",
+          "description": "Wraps retry in try/catch to handle exhaustion",
+          "type": "contains",
+          "keywords": [
+            "try",
+            "catch"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-05",
+      "title": "Fetch, transform, and write structured output",
+      "prompt": "Write a zx script that fetches JSON from https://api.example.com/users, filters to only active users (where active === true), extracts their id and email fields, sorts by email alphabetically, and writes the result as a formatted JSON file to ./active-users.json. Handle fetch errors gracefully.",
+      "categories": [
+        "networking",
+        "data-transformation",
+        "file-operations"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses fetch() global or curl to retrieve data",
+          "type": "contains",
+          "keywords": [
+            "fetch(",
+            "curl"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Filters users where active is true",
+          "type": "contains",
+          "keywords": [
+            "filter(",
+            "active"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Maps to id/email only",
+          "type": "contains",
+          "keywords": [
+            "map(",
+            "id",
+            "email"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Sorts by email",
+          "type": "contains",
+          "keywords": [
+            "sort(",
+            "email",
+            "localeCompare"
+          ]
+        },
+        {
+          "id": "a5",
+          "description": "Writes formatted JSON output",
+          "type": "contains",
+          "keywords": [
+            "JSON.stringify",
+            "null, 2",
+            "outputFile",
+            "writeFile"
+          ]
+        },
+        {
+          "id": "a6",
+          "description": "Handles fetch errors (non-ok response or network failure)",
+          "type": "contains",
+          "keywords": [
+            "try",
+            "catch",
+            "res.ok",
+            "throw",
+            "if (!"
+          ]
+        }
+      ]
+    }
+  ]
+}

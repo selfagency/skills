@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "query": "Write a cross-platform Node.js script that deploys files and handles rollback on failure",
+    "should_trigger": true,
+    "category": "deployment",
+    "reason": "Deployment automation with error handling = zx domain"
+  },
+  {
+    "id": 2,
+    "query": "How do I use $`command` syntax in Node.js to run shell commands?",
+    "should_trigger": true,
+    "category": "basics",
+    "reason": "Explicit $`command` template literal mention — zx syntax"
+  },
+  {
+    "id": 3,
+    "query": "I need to monitor disk usage on a Linux server and alert when over 90%",
+    "should_trigger": true,
+    "category": "monitoring",
+    "reason": "jc + df + threshold logic — covered in skill"
+  },
+  {
+    "id": 4,
+    "query": "How do I write a Dockerfile for a Node.js application?",
+    "should_trigger": false,
+    "category": "containers",
+    "reason": "Docker configuration — not shell scripting with zx"
+  },
+  {
+    "id": 5,
+    "query": "How do I add authentication middleware to my Express.js app?",
+    "should_trigger": false,
+    "category": "web-framework",
+    "reason": "Express.js / HTTP middleware — unrelated to shell automation"
+  }
+]

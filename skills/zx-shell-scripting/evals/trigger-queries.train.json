@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "query": "Write a zx script to find all .log files and count error lines",
+    "should_trigger": true,
+    "category": "file-operations",
+    "reason": "Core use case: file glob + output parsing with zx"
+  },
+  {
+    "id": 2,
+    "query": "How do I run shell commands from Node.js using zx?",
+    "should_trigger": true,
+    "category": "basics",
+    "reason": "Explicit zx mention"
+  },
+  {
+    "id": 3,
+    "query": "I need a bash script to check multiple server health endpoints in parallel",
+    "should_trigger": true,
+    "category": "parallel-execution",
+    "reason": "Bash script request — skill covers this with zx"
+  },
+  {
+    "id": 4,
+    "query": "Write a Node.js script that spawns subprocesses and pipes their output",
+    "should_trigger": true,
+    "category": "subprocess",
+    "reason": "Subprocess piping is core zx capability"
+  },
+  {
+    "id": 5,
+    "query": "How do I parse ps output as JSON and filter by CPU usage?",
+    "should_trigger": true,
+    "category": "jc-integration",
+    "reason": "jc + ps pattern covered in skill"
+  },
+  {
+    "id": 6,
+    "query": "Write a script with retry logic for a flaky HTTP endpoint",
+    "should_trigger": true,
+    "category": "error-handling",
+    "reason": "retry() is a core zx pattern"
+  },
+  {
+    "id": 7,
+    "query": "I want to replace my bash script with something more maintainable in JavaScript",
+    "should_trigger": true,
+    "category": "migration",
+    "reason": "Classic zx motivation — replacing bash"
+  },
+  {
+    "id": 8,
+    "query": "How do I capture stdout and stderr separately when running CLI commands in Node?",
+    "should_trigger": true,
+    "category": "output-capture",
+    "reason": "ProcessOutput.stdout / .stderr pattern"
+  },
+  {
+    "id": 9,
+    "query": "Write an automation script that runs git commands and processes the output",
+    "should_trigger": true,
+    "category": "git-automation",
+    "reason": "Shell automation with output processing = zx domain"
+  },
+  {
+    "id": 10,
+    "query": "How do I stream output from a long-running command line by line?",
+    "should_trigger": true,
+    "category": "streaming",
+    "reason": "Async iteration over ProcessPromise is a documented zx pattern"
+  },
+  {
+    "id": 11,
+    "query": "How do I set up a GitHub Actions workflow for CI/CD?",
+    "should_trigger": false,
+    "category": "ci-cd",
+    "reason": "GitHub Actions is a different domain (yaml config, not shell scripting)"
+  },
+  {
+    "id": 12,
+    "query": "How do I write a Python script to automate file processing?",
+    "should_trigger": false,
+    "category": "python",
+    "reason": "Python, not zx/Node.js scripting"
+  },
+  {
+    "id": 13,
+    "query": "Write a React component that calls a REST API",
+    "should_trigger": false,
+    "category": "frontend",
+    "reason": "Frontend component — unrelated to shell automation"
+  },
+  {
+    "id": 14,
+    "query": "How do I configure ESLint for my TypeScript project?",
+    "should_trigger": false,
+    "category": "tooling",
+    "reason": "Tooling config — not shell scripting"
+  },
+  {
+    "id": 15,
+    "query": "Write a SQL query to find duplicate records in a users table",
+    "should_trigger": false,
+    "category": "database",
+    "reason": "SQL/database domain — unrelated"
+  }
+]
