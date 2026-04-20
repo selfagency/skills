@@ -1,0 +1,46 @@
+skills/cli-admin-automation/references/cherri-automation.md
+  h_5cf1e2c1161853 1-460
+skills/cli-admin-automation/evals/trigger-queries.train.json
+  h_5cf1e2c1161853 1-86
+skills/cli-admin-automation/references/cli-foundations.md
+  h_5cf1e2c1161853 1-185
+skills/cli-admin-automation/scripts/monitor-system-health.py
+  h_5cf1e2c1161853 1-241
+skills/cli-admin-automation/evals/trigger-queries.validation.json
+  h_5cf1e2c1161853 1-58
+skills/cli-admin-automation/references/jc-parser-reference.md
+  h_5cf1e2c1161853 1-263
+skills/cli-admin-automation/scripts/parse-homebrew-bundle.sh
+  h_5cf1e2c1161853 1-188
+skills/cli-admin-automation/SKILL.md
+  h_5cf1e2c1161853 1-290
+skills/cli-admin-automation/evals/evals.json
+  h_5cf1e2c1161853 1-437
+skills/cli-admin-automation/references/homebrew-workflows.md
+  h_5cf1e2c1161853 1-303
+skills/cli-admin-automation/references/linux-remote-admin.md
+  h_5cf1e2c1161853 1-449
+skills/cli-admin-automation/evals/description-iterations.json
+  h_5cf1e2c1161853 1-56
+skills/cli-admin-automation/scripts/validate-env-vars.py
+  h_5cf1e2c1161853 1-254
+skills/cli-admin-automation/scripts/validate-jc-output.py
+  h_5cf1e2c1161853 1-168
+skills/cli-admin-automation/scripts/README.md
+  h_5cf1e2c1161853 1-273
+skills/cli-admin-automation/references/1password-secrets.md
+  h_5cf1e2c1161853 1-499
+skills/cli-admin-automation/references/macos-system-admin.md
+  h_5cf1e2c1161853 1-372
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "80b2108935d581d00a7a5d139b4afb189a88d9f4",
+  "prompts": {},
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
