@@ -1,0 +1,297 @@
+{
+  "skill": "lint-format-typecheck-ci-hooks",
+  "version": "1.0",
+  "description": "Trigger and behavior evals for toolchain selection, config-copy/generate flow, and husky+lint-staged mode setup.",
+  "evaluation_protocol": {
+    "runs_per_case": 3,
+    "comparison_modes": [
+      "with_skill",
+      "without_skill"
+    ]
+  },
+  "trigger_queries": {
+    "train": [
+      {
+        "query": "Set up husky and lint-staged so commits run lint checks only. I want oxlint and oxfmt.",
+        "should_trigger": true
+      },
+      {
+        "query": "Install Biome and make pre-commit auto-fix formatting and lint issues.",
+        "should_trigger": true
+      },
+      {
+        "query": "Can you wire ESLint + Prettier with husky pre-commit and support markdown/yaml/json too?",
+        "should_trigger": true
+      },
+      {
+        "query": "Set up husky + lint-staged with oxlint/oxfmt, but use rumdl for markdown lint and formatting.",
+        "should_trigger": true
+      },
+      {
+        "query": "Add GitHub Actions CI to run typecheck, lint, and formatter checks without autofixing.",
+        "should_trigger": true
+      },
+      {
+        "query": "My CI fails on eslint warnings, fix the GitHub workflow only.",
+        "should_trigger": false
+      },
+      {
+        "query": "How do I write a good README?",
+        "should_trigger": false
+      },
+      {
+        "query": "Install tailwind in my app",
+        "should_trigger": false
+      }
+    ],
+    "validation": [
+      {
+        "query": "I need pre-commit hooks that either check or fix files, and I want to choose between biome and eslint/prettier.",
+        "should_trigger": true
+      },
+      {
+        "query": "Set up oxlint+oxfmt and copy my existing configs into this project.",
+        "should_trigger": true
+      },
+      {
+        "query": "I want eslint + prettier for code and rumdl for markdown in pre-commit hooks.",
+        "should_trigger": true
+      },
+      {
+        "query": "Set up GitHub Actions so typecheck runs before lint and format checks, no autofix.",
+        "should_trigger": true
+      },
+      {
+        "query": "Create a release changelog from commits.",
+        "should_trigger": false
+      },
+      {
+        "query": "Add playwright tests to my login flow.",
+        "should_trigger": false
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "eval-01",
+      "title": "Oxc check mode setup",
+      "prompt": "Configure this repo to use oxlint and oxfmt with husky + lint-staged. I want check-only mode so commits fail if issues exist. Ensure support for ts, js, yaml, json, and markdown.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Asks or confirms toolchain and mode decisions",
+          "type": "contains",
+          "keywords": [
+            "oxc",
+            "check",
+            "lint-staged",
+            "husky"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Uses oxlint for js/ts linting and oxfmt for formatting",
+          "type": "contains",
+          "keywords": [
+            "oxlint",
+            "oxfmt"
+          ]
+        },
+        {
+          "id": "a2b",
+          "description": "Runs typecheck before lint-staged in pre-commit flow",
+          "type": "contains",
+          "keywords": [
+            "typecheck",
+            "tsc --noEmit",
+            "lint-staged"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Does not incorrectly claim oxlint covers yaml/json/markdown linting",
+          "type": "must_not_contain",
+          "keywords": [
+            "oxlint lints yaml",
+            "oxlint lints markdown",
+            "oxlint lints json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-02",
+      "title": "Biome fix mode setup",
+      "prompt": "Install Biome and configure pre-commit to auto-fix files on commit. We have mixed files, so avoid unmatched-file errors.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses biome check --write for fix mode",
+          "type": "contains",
+          "keywords": [
+            "biome check --write"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Includes robust flags for mixed staged files",
+          "type": "contains",
+          "keywords": [
+            "--files-ignore-unknown=true",
+            "--no-errors-on-unmatched"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-03",
+      "title": "ESLint+Prettier fix ordering",
+      "prompt": "Set up eslint+prettier with husky/lint-staged in auto-fix mode. Make sure js/ts files don't have race conditions between eslint and prettier.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses eslint before prettier for overlapping js/ts files",
+          "type": "contains",
+          "keywords": [
+            "eslint --fix",
+            "prettier --write"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Avoids overlapping concurrent write pattern anti-pattern",
+          "type": "must_not_contain",
+          "keywords": [
+            "\"*\": \"prettier --write\"",
+            "\"*.ts\": \"eslint --fix\""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-04",
+      "title": "Copy existing configs flow",
+      "prompt": "Use my existing lint and format configs instead of generating new ones, then wire up husky/lint-staged. What do you need from me?",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Requests explicit config paths",
+          "type": "contains",
+          "keywords": [
+            "path",
+            "existing config",
+            "copy"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Validates config paths before applying",
+          "type": "contains",
+          "keywords": [
+            "validate",
+            "exists",
+            "file"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-05",
+      "title": "Check vs fix choice",
+      "prompt": "I want hooks but I'm not sure if we should auto-fix or only check. Help me choose and implement one.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Explains tradeoff between check and fix modes",
+          "type": "contains",
+          "keywords": [
+            "check mode",
+            "fix mode",
+            "tradeoff"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Asks user to select mode before mutation",
+          "type": "contains",
+          "keywords": [
+            "choose",
+            "mode"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-06",
+      "title": "Rumdl supersedes markdown handling",
+      "prompt": "Configure eslint+prettier for JS/TS, but use rumdl as the markdown linter/formatter. Rumdl should supersede prettier for markdown files in lint-staged.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Uses Rumdl commands for Markdown",
+          "type": "contains",
+          "keywords": [
+            "rumdl check",
+            "rumdl fmt"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Keeps JS/TS on ESLint+Prettier",
+          "type": "contains",
+          "keywords": [
+            "eslint --fix",
+            "prettier --write"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Does not route markdown extensions through prettier when Rumdl selected",
+          "type": "must_not_contain",
+          "keywords": [
+            "*.{yaml,yml,json,jsonc,md,markdown,mdx}",
+            "prettier --write --ignore-unknown"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-07",
+      "title": "GitHub Actions CI is check-only",
+      "prompt": "Add GitHub Actions CI for this repo so it runs typecheck before linting and formatting checks. Use check-only behavior and do not add autofix.ci.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Includes typecheck before linting in CI guidance",
+          "type": "contains",
+          "keywords": [
+            "typecheck",
+            "tsc --noEmit",
+            "GitHub Actions"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Uses check-only formatter commands",
+          "type": "contains",
+          "keywords": [
+            "prettier --check",
+            "oxfmt --check",
+            "biome ci",
+            "rumdl check"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Does not suggest autofix in CI",
+          "type": "must_not_contain",
+          "keywords": [
+            "autofix.ci",
+            "prettier . --write",
+            "oxfmt --write"
+          ]
+        }
+      ]
+    }
+  ]
+}
