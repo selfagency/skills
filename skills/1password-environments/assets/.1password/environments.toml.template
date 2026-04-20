@@ -1,0 +1,4 @@
+# 1Password Environments template
+# Add one or more mounted .env paths relative to project root.
+
+mount_paths = [".env", "billing.env"]

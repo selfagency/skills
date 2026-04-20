@@ -1,0 +1,100 @@
+{
+  "skill": "1password-ssh",
+  "version": "1.0",
+  "description": "Quality evals for 1Password SSH agent and Git signing workflows.",
+  "cases": [
+    {
+      "id": "eval-01",
+      "title": "macOS SSH agent setup",
+      "prompt": "Set up the 1Password SSH agent on macOS and configure my SSH client to use it for GitHub.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response includes macOS IdentityAgent/socket configuration",
+          "type": "contains",
+          "keywords": [
+            "IdentityAgent",
+            "agent.sock",
+            "~/Library/Group Containers"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response includes verification steps with ssh-add -l or equivalent",
+          "type": "contains",
+          "keywords": [
+            "ssh-add -l"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response states private keys do not leave 1Password",
+          "type": "security",
+          "keywords": [
+            "private keys never leave 1Password"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-02",
+      "title": "Git commit signing setup",
+      "prompt": "I need to sign Git commits with my 1Password SSH key and verify signatures on GitHub.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response includes SSH signing git config values",
+          "type": "contains",
+          "keywords": [
+            "gpg.format ssh",
+            "user.signingkey",
+            "commit.gpgsign"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response includes provider registration as signing key",
+          "type": "contains",
+          "keywords": [
+            "GitHub",
+            "Signing key",
+            "verified"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response mentions Git version compatibility",
+          "type": "contains",
+          "keywords": [
+            "Git 2.34"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-03",
+      "title": "Scope boundary to environments skill",
+      "prompt": "I want to mount local .env files from 1Password Environments and validate them with agent hooks.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response avoids positioning SSH as primary for env mounts",
+          "type": "quality",
+          "must_not_contain": [
+            "use 1password-ssh for mounted env validation"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response routes to environments-focused guidance",
+          "type": "contains",
+          "keywords": [
+            "1password-environments",
+            "mount_paths",
+            "agent hook"
+          ]
+        }
+      ]
+    }
+  ]
+}

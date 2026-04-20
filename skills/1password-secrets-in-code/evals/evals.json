@@ -1,0 +1,111 @@
+{
+  "skill": "1password-secrets-in-code",
+  "version": "1.0",
+  "description": "Quality evals for 1Password secrets-in-code, MCP wrapping, SDK, and CI/CD patterns.",
+  "cases": [
+    {
+      "id": "eval-01",
+      "title": "MCP plaintext token migration",
+      "prompt": "My mcp.json currently contains plaintext API tokens. Migrate me to a secure 1Password pattern.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response uses op:// secret reference syntax",
+          "type": "contains",
+          "keywords": [
+            "op://vault/item/field",
+            "op://"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response includes op run --env-file wrapping",
+          "type": "contains",
+          "keywords": [
+            "op run",
+            "--env-file",
+            ".env.op"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response includes gitignore guidance for env files",
+          "type": "security",
+          "keywords": [
+            ".gitignore",
+            ".env",
+            ".env.op"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response avoids keeping plaintext tokens in final config",
+          "type": "security",
+          "must_not_contain": [
+            "token: \"ghp_",
+            "store raw token in mcp.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-02",
+      "title": "GitHub Actions secret loading",
+      "prompt": "Show me how to load secrets in GitHub Actions with 1Password and note any platform limits.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response mentions load-secrets-action",
+          "type": "contains",
+          "keywords": [
+            "1password/load-secrets-action@v2"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response includes configure/token wiring step",
+          "type": "contains",
+          "keywords": [
+            "configure@v2",
+            "OP_SERVICE_ACCOUNT_TOKEN"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response notes runner platform limitation",
+          "type": "contains",
+          "keywords": [
+            "Linux",
+            "macOS",
+            "not Windows"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-03",
+      "title": "Scope boundary to SSH skill",
+      "prompt": "Can you create an SSH key and set up IdentityAgent in my ssh config?",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response avoids positioning secrets-in-code as SSH key setup skill",
+          "type": "quality",
+          "must_not_contain": [
+            "use 1password-secrets-in-code to configure IdentityAgent"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response routes to SSH-focused guidance",
+          "type": "contains",
+          "keywords": [
+            "1password-ssh",
+            "IdentityAgent",
+            "SSH agent"
+          ]
+        }
+      ]
+    }
+  ]
+}

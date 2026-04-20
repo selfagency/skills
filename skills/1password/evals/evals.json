@@ -1,0 +1,119 @@
+{
+  "skill": "1password",
+  "version": "1.0",
+  "description": "Quality evals for 1password CLI workflows.",
+  "cases": [
+    {
+      "id": "eval-01",
+      "title": "Install and verify secure CLI flow",
+      "prompt": "Install and configure 1Password CLI on my Mac, then verify I can securely read a secret in the terminal.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response includes install verification using op --version",
+          "type": "contains",
+          "keywords": [
+            "op --version"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response includes sign-in and identity verification",
+          "type": "contains",
+          "keywords": [
+            "op signin",
+            "op whoami"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response uses op read/op run secure access patterns",
+          "type": "contains",
+          "keywords": [
+            "op read",
+            "op run",
+            "op://"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response avoids plaintext secret storage guidance",
+          "type": "security",
+          "must_not_contain": [
+            "hardcode token",
+            "plaintext secret file"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-02",
+      "title": "Shell plugin biometric auth",
+      "prompt": "I need AWS CLI and GitHub CLI to authenticate via 1Password biometric prompts. How should I set that up?",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response uses op plugin init workflow",
+          "type": "contains",
+          "keywords": [
+            "op plugin init"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response includes adding eval snippet to shell rc",
+          "type": "contains",
+          "keywords": [
+            "eval $(",
+            ".zshrc",
+            ".bashrc"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response includes shell restart/reload verification",
+          "type": "contains",
+          "keywords": [
+            "restart shell",
+            "reload"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-03",
+      "title": "Least-privilege service account usage",
+      "prompt": "Create a service account for CI that can read only my deployment secrets and show how to use it with op.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response recommends least-privilege vault scoping",
+          "type": "security",
+          "keywords": [
+            "least privilege",
+            "read-only",
+            "vault scope"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response uses OP_SERVICE_ACCOUNT_TOKEN and identity verification",
+          "type": "contains",
+          "keywords": [
+            "OP_SERVICE_ACCOUNT_TOKEN",
+            "op user get --me"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response mentions immutable service account scope gotcha",
+          "type": "quality",
+          "keywords": [
+            "immutable",
+            "create a new service account"
+          ]
+        }
+      ]
+    }
+  ]
+}

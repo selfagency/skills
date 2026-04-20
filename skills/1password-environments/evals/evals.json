@@ -1,0 +1,94 @@
+{
+  "skill": "1password-environments",
+  "version": "1.0",
+  "description": "Quality evals for 1Password Environments and hook validation workflows.",
+  "cases": [
+    {
+      "id": "eval-01",
+      "title": "Secure local mounted env setup",
+      "prompt": "Set up 1Password Environments so my local .env is mounted securely and validated before Copilot runs commands.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response includes .1password/environments.toml mount_paths guidance",
+          "type": "contains",
+          "keywords": [
+            ".1password/environments.toml",
+            "mount_paths"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response mentions hook-based validation before command execution",
+          "type": "contains",
+          "keywords": [
+            "agent hook",
+            "preToolUse",
+            "before command"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response explains FIFO-backed env behavior",
+          "type": "contains",
+          "keywords": [
+            "FIFO",
+            "named pipe"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-02",
+      "title": "Vite restart loop mitigation",
+      "prompt": "My Vite dev server keeps restarting after I mounted .env from 1Password. What's the fix?",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response identifies file watcher and FIFO interaction",
+          "type": "contains",
+          "keywords": [
+            "watch",
+            "FIFO",
+            "restart loop"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response recommends ignoring mounted env file in Vite watch config",
+          "type": "contains",
+          "keywords": [
+            "vite.config",
+            "server.watch.ignored",
+            ".env"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-03",
+      "title": "Scope boundary to SSH skill",
+      "prompt": "Help me generate SSH keys in 1Password and set up git commit signing.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response avoids positioning Environments as primary solution",
+          "type": "quality",
+          "must_not_contain": [
+            "use 1password-environments for ssh keys"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response routes to SSH-focused guidance",
+          "type": "contains",
+          "keywords": [
+            "1password-ssh",
+            "SSH agent",
+            "git signing"
+          ]
+        }
+      ]
+    }
+  ]
+}
