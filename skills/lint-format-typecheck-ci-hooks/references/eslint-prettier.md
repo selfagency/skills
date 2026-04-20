@@ -32,7 +32,7 @@ Apply `eslint-config-prettier` compatibility in ESLint config stack.
 - `lint`: `eslint .`
 - `lint:fix`: `eslint . --fix`
 - `format`: `prettier . --write --ignore-unknown`
-- `format:check`: `prettier . --check`
+- `format:check`: `prettier . --check --ignore-unknown`
 
 ## lint-staged templates
 
@@ -59,7 +59,7 @@ For overlapping JS/TS globs in fix mode, run ESLint first and Prettier second in
 
 - Run `typecheck` first: `tsc --noEmit`
 - Lint in CI: `eslint .`
-- Format check in CI: `prettier . --check`
+- Format check in CI: `prettier . --check --ignore-unknown`
 - CI should be check-only; do not use `prettier --write`
 
 ## Caveats

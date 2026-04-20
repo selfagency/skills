@@ -39,8 +39,8 @@ Generate defaults if missing:
 
 ### fix mode
 
-- JS/TS: run `oxlint --fix`
-- Non-Markdown supported files: run `oxfmt --no-error-on-unmatched-pattern`
+- JS/TS: use a single lint-staged glob with an ordered command array: run `oxlint --fix` first, then `oxfmt`
+- YAML/JSON: use a separate non-overlapping lint-staged glob that runs `oxfmt --no-error-on-unmatched-pattern`
 - If Rumdl is selected: Markdown files run via `rumdl check --fix` then `rumdl fmt`
 
 ## Coverage mapping
@@ -51,8 +51,8 @@ Generate defaults if missing:
 ## CI guidance
 
 - Run `typecheck` first: `tsc --noEmit`
-- Lint in CI: `oxlint`
-- Format check in CI: `oxfmt --check`
+- Lint in CI: `oxlint .`
+- Format check in CI: `oxfmt --check .`
 - CI should be check-only; do not add formatter autofix steps
 
 ## Caveats

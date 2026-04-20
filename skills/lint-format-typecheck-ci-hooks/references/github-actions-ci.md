@@ -32,7 +32,7 @@ Use this when the user asks to add GitHub Actions CI for typechecking, linting, 
 
 - `typecheck`: `tsc --noEmit`
 - `lint`: `eslint .`
-- `format:check`: `prettier . --check`
+- `format:check`: `prettier . --check --ignore-unknown`
 
 ### Biome
 
@@ -44,8 +44,8 @@ Prefer `biome ci .` in CI because it is designed for CI environments and emits G
 ### Oxc
 
 - `typecheck`: `tsc --noEmit`
-- `lint`: `oxlint`
-- `format:check`: `oxfmt --check`
+- `lint`: `oxlint .`
+- `format:check`: `oxfmt --check .`
 
 ### Rumdl
 

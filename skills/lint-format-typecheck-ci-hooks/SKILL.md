@@ -24,7 +24,7 @@ Always ensure support for **TS, JS, YAML, JSON, Markdown** by combining tools co
 
 ## Defaults
 
-- Default package manager: detect from lockfile (`pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`, `bun.lock`).
+- Default package manager: detect from lockfile (`pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`, `bun.lockb`).
 - Default hook manager: Husky + lint-staged.
 - Default operation: prefer reusing existing configs if user provides paths; otherwise generate minimal safe configs.
 

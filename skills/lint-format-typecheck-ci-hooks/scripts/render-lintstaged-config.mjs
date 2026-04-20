@@ -65,8 +65,8 @@ function buildConfig(stack, mode, markdown) {
       return config
     }
     const config = {
-      [jsTsGlob]: ['oxlint --fix'],
-      [`*.{js,jsx,ts,tsx,mjs,cjs,mts,cts,yaml,yml,json,jsonc}`]: ['oxfmt --no-error-on-unmatched-pattern'],
+      [jsTsGlob]: ['oxlint --fix', 'oxfmt --no-error-on-unmatched-pattern'],
+      [nonMarkdownDataGlob]: ['oxfmt --no-error-on-unmatched-pattern'],
     }
     if (markdown === 'rumdl') {
       config[markdownGlob] = ['rumdl check --fix', 'rumdl fmt']

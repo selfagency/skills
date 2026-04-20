@@ -47,12 +47,12 @@ Useful global settings (from Rumdl docs):
 
 ### check mode
 
-- `*.{md,markdown,mdx}`: `rumdl check`
+- `*.{md,markdown,mdown,mkdn,mdx}`: `rumdl check`
 
 ### fix mode
 
-- `*.{md,markdown,mdx}`: `rumdl check --fix`
-- `*.{md,markdown,mdx}`: `rumdl fmt`
+- `*.{md,markdown,mdown,mkdn,mdx}`: `rumdl check --fix`
+- `*.{md,markdown,mdown,mkdn,mdx}`: `rumdl fmt`
 
 Use ordered arrays in lint-staged for the same Markdown glob.
 

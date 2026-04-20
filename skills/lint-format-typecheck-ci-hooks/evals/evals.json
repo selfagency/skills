@@ -110,8 +110,8 @@
         {
           "id": "a3",
           "description": "Does not incorrectly claim oxlint covers yaml/json/markdown linting",
-          "type": "must_not_contain",
-          "keywords": [
+          "type": "contains",
+          "must_not_contain": [
             "oxlint lints yaml",
             "oxlint lints markdown",
             "oxlint lints json"
@@ -160,8 +160,8 @@
         {
           "id": "a2",
           "description": "Avoids overlapping concurrent write pattern anti-pattern",
-          "type": "must_not_contain",
-          "keywords": [
+          "type": "contains",
+          "must_not_contain": [
             "\"*\": \"prettier --write\"",
             "\"*.ts\": \"eslint --fix\""
           ]
@@ -247,8 +247,8 @@
         {
           "id": "a3",
           "description": "Does not route markdown extensions through prettier when Rumdl selected",
-          "type": "must_not_contain",
-          "keywords": [
+          "type": "contains",
+          "must_not_contain": [
             "*.{yaml,yml,json,jsonc,md,markdown,mdx}",
             "prettier --write --ignore-unknown"
           ]
@@ -284,8 +284,8 @@
         {
           "id": "a3",
           "description": "Does not suggest autofix in CI",
-          "type": "must_not_contain",
-          "keywords": [
+          "type": "contains",
+          "must_not_contain": [
             "autofix.ci",
             "prettier . --write",
             "oxfmt --write"
