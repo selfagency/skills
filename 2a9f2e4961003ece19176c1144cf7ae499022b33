@@ -1,0 +1,30 @@
+skills/zx-shell-scripting/references/shell-patterns.md
+  h_5cf1e2c1161853 1-348
+skills/zx-shell-scripting/references/bash-internals.md
+  h_5cf1e2c1161853 1-448
+skills/zx-shell-scripting/references/api-reference.md
+  h_5cf1e2c1161853 1-282
+skills/zx-shell-scripting/evals/trigger-queries.train.json
+  h_5cf1e2c1161853 1-107
+skills/zx-shell-scripting/evals/trigger-queries.validation.json
+  h_5cf1e2c1161853 1-37
+skills/zx-shell-scripting/references/filename-safety.md
+  h_5cf1e2c1161853 1-264
+skills/zx-shell-scripting/references/error-handling.md
+  h_5cf1e2c1161853 1-365
+skills/zx-shell-scripting/SKILL.md
+  h_5cf1e2c1161853 1-195
+skills/zx-shell-scripting/evals/evals.json
+  h_5cf1e2c1161853 1-328
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "2a9f2e4961003ece19176c1144cf7ae499022b33",
+  "prompts": {},
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
