@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "query": "I need to set up a reproducible dev environment for my team using Homebrew",
+    "should_trigger": true,
+    "category": "package-management",
+    "reason": "Core skill use case: Brewfile for team reproducibility"
+  },
+  {
+    "id": 2,
+    "query": "How do I monitor a remote Linux server and get alerts when CPU is high?",
+    "should_trigger": true,
+    "category": "remote-admin",
+    "reason": "SSH + jc parsing + Cherri automation"
+  },
+  {
+    "id": 3,
+    "query": "I want to safely store API keys and rotate them automatically",
+    "should_trigger": true,
+    "category": "secrets",
+    "reason": "1Password CLI core pattern"
+  },
+  {
+    "id": 4,
+    "query": "Show me how to parse process output and trigger automation based on conditions",
+    "should_trigger": true,
+    "category": "jc-automation",
+    "reason": "jc + Cherri integration"
+  },
+  {
+    "id": 5,
+    "query": "I need to automate backups from macOS to a Linux server with encrypted credentials",
+    "should_trigger": true,
+    "category": "full-workflow",
+    "reason": "macOS + SSH + 1Password + Cherri"
+  },
+  {
+    "id": 6,
+    "query": "How do I check if specific packages are installed across a fleet of servers?",
+    "should_trigger": true,
+    "category": "remote-diagnostics",
+    "reason": "SSH + jc parsing for aggregation"
+  },
+  {
+    "id": 7,
+    "query": "Can you help me write a Siri Shortcut that fetches secrets and runs commands?",
+    "should_trigger": true,
+    "category": "cherri-automation",
+    "reason": "Cherri language for Shortcuts development"
+  },
+  {
+    "id": 8,
+    "query": "What's the best way to organize team secrets in a 1Password vault?",
+    "should_trigger": true,
+    "category": "secrets-structure",
+    "reason": "1Password vault management, team workflows"
+  },
+  {
+    "id": 9,
+    "query": "I want to batch-update system settings on macOS without GUI intervention",
+    "should_trigger": true,
+    "category": "macos-admin",
+    "reason": "m-cli + defaults write CLI patterns"
+  },
+  {
+    "id": 10,
+    "query": "How do I parse network traffic and correlate connection data with jq?",
+    "should_trigger": true,
+    "category": "jc-network",
+    "reason": "jc netstat parsing + jq filtering"
+  },
+  {
+    "id": 11,
+    "query": "Set up a bash function that uses jc to monitor disk usage and alert on thresholds",
+    "should_trigger": true,
+    "category": "scripting-jc",
+    "reason": "jc df parsing + shell scripting foundations"
+  },
+  {
+    "id": 12,
+    "query": "I need to deploy an app to multiple servers, inject secrets from 1Password, and verify health",
+    "should_trigger": true,
+    "category": "multi-step-deploy",
+    "reason": "SSH + 1Password + jc health checks"
+  }
+]

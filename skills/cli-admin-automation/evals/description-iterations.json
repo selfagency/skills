@@ -1,0 +1,56 @@
+{
+  "current_iteration": 2,
+  "active_description": "Automate system administration workflows on macOS and Linux. Use this skill when: setting up reproducible dev environments (Brewfile), parsing CLI command output programmatically (jc + jq), monitoring remote servers via SSH with alerts, integrating API keys and secrets securely (1Password CLI), building automation workflows (Cherri Siri Shortcuts programming), or batch-managing system configurations. Covers package management (Homebrew), structured JSON parsing (jc), SSH-based remote administration, secure credential injection, cross-platform multi-step automation, and fleet monitoring.",
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Administer macOS and Linux systems via CLI using jc for JSON-parsed command output, Homebrew for reproducible package management, 1Password CLI for secure credential handling, and Cherri for automation workflows. Use this skill when managing local or remote infrastructure, setting up team development environments, automating cross-platform system tasks, or integrating secrets into scripts. Covers SSH-based remote administration, structured CLI output parsing with jq, secrets rotation, and multi-step automation.",
+      "length": 341,
+      "status": "retired",
+      "weaknesses": [
+        "No explicit action verbs tied to tools",
+        "Does not name Brewfile, SSH alerts, or macOS admin commands",
+        "Generic phrasing ('managing', 'automating') overlaps with many other skills"
+      ]
+    },
+    {
+      "iteration": 2,
+      "description": "Automate system administration workflows on macOS and Linux. Use this skill when: setting up reproducible dev environments (Brewfile), parsing CLI command output programmatically (jc + jq), monitoring remote servers via SSH with alerts, integrating API keys and secrets securely (1Password CLI), building automation workflows (Cherri Siri Shortcuts programming), or batch-managing system configurations. Covers package management (Homebrew), structured JSON parsing (jc), SSH-based remote administration, secure credential injection, cross-platform multi-step automation, and fleet monitoring.",
+      "length": 390,
+      "status": "active",
+      "improvements": [
+        "Explicit use-case list with parenthetical tool references",
+        "Named Brewfile, Cherri, 1Password CLI with action context",
+        "Fleet monitoring and batch configs added as boundary terms",
+        "Should-trigger rate expected: 90%+ on train set, 80%+ on validation"
+      ],
+      "boundary_risk": "Low — 'jc', 'Brewfile', 'Cherri', and '1Password CLI' are specific enough to avoid matching generic CLI or Docker questions"
+    }
+  ],
+  "trigger_analysis": {
+    "validation_set_boundary_risks": [
+      {
+        "risk": "Homebrew triggers on Docker/container setup",
+        "mitigation": "Description says 'Brewfile' not generic 'package management'"
+      },
+      {
+        "risk": "SSH triggers on generic networking questions",
+        "mitigation": "SSH is paired with 'remote servers + alerts' context, not general networking"
+      },
+      {
+        "risk": "1Password triggers on generic auth questions",
+        "mitigation": "1Password CLI is named specifically, not just 'secrets' or 'passwords'"
+      }
+    ]
+  },
+  "next_iteration_candidates": [
+    {
+      "change": "Add 'm-cli' to description",
+      "rationale": "Currently only in body text — may miss macOS sysadmin queries about system settings"
+    },
+    {
+      "change": "Strengthen 'batch system configuration' framing",
+      "rationale": "eval-06 (macOS settings standardization) needs clearer trigger signal"
+    }
+  ]
+}

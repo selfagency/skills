@@ -1,0 +1,437 @@
+{
+  "skill": "cli-admin-automation",
+  "version": "1.0",
+  "description": "Quality evaluation suite for cli-admin-automation skill. Tests correctness, completeness, and output quality against baseline (no-skill) responses.",
+  "evaluation_protocol": {
+    "runs_per_case": 3,
+    "comparison_modes": [
+      "with_skill",
+      "without_skill"
+    ],
+    "metrics": [
+      "completeness",
+      "correctness",
+      "security",
+      "cross_tool_integration"
+    ]
+  },
+  "cases": [
+    {
+      "id": "eval-01",
+      "title": "Brewfile setup for a 5-person engineering team",
+      "prompt": "I'm setting up a standardized dev environment for my 5-person engineering team on macOS. We use Node.js, PostgreSQL, Redis, and various CLI tools. How do I create and manage a Brewfile that everyone can use, including authenticating a private GitHub tap?",
+      "categories": [
+        "homebrew",
+        "team-environment"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response shows `brew bundle dump --file Brewfile` or equivalent to create initial Brewfile",
+          "type": "contains",
+          "keywords": [
+            "brew bundle",
+            "Brewfile",
+            "dump"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response covers private tap authentication without hardcoding tokens",
+          "type": "security",
+          "keywords": [
+            "HOMEBREW_GITHUB_TOKEN",
+            "1Password",
+            "op read",
+            "environment variable"
+          ],
+          "must_not_contain": [
+            "hardcode",
+            "plaintext token",
+            "~/.gitconfig"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response includes `brew bundle install` for team members",
+          "type": "contains",
+          "keywords": [
+            "brew bundle install"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response mentions or provides a validation/check mechanism",
+          "type": "contains",
+          "keywords": [
+            "--check",
+            "verify",
+            "validate",
+            "parse-homebrew-bundle"
+          ]
+        }
+      ],
+      "expected_score_range": {
+        "with_skill": [
+          3,
+          4
+        ],
+        "without_skill": [
+          1,
+          2
+        ]
+      },
+      "notes": "Tests whether skill improves Brewfile depth and private tap security handling over baseline"
+    },
+    {
+      "id": "eval-02",
+      "title": "Monitor disk usage across 10 servers, trigger Slack alert",
+      "prompt": "I have 10 Linux servers and need to check disk usage on all of them every 30 minutes. If any disk exceeds 80% usage, I want a Slack alert. How do I set this up using SSH?",
+      "categories": [
+        "remote-admin",
+        "jc",
+        "alerts"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response uses `df` piped through `jc --df` for structured parsing",
+          "type": "contains",
+          "keywords": [
+            "jc --df",
+            "df -h"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response loops over servers (array or list pattern)",
+          "type": "pattern",
+          "keywords": [
+            "for ",
+            "while ",
+            "servers=",
+            "hosts="
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Slack webhook URL retrieved securely, not hardcoded",
+          "type": "security",
+          "keywords": [
+            "op read",
+            "1Password",
+            "env var",
+            "SLACK_WEBHOOK"
+          ],
+          "must_not_contain": [
+            "https://hooks.slack.com/services/hardcoded"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response mentions scheduling mechanism (cron or launchd)",
+          "type": "contains",
+          "keywords": [
+            "cron",
+            "crontab",
+            "launchd",
+            "*/30"
+          ]
+        },
+        {
+          "id": "a5",
+          "description": "Response handles SSH connection failures (timeout or error handling)",
+          "type": "contains",
+          "keywords": [
+            "ConnectTimeout",
+            "2>/dev/null",
+            "|| ",
+            "err"
+          ]
+        }
+      ],
+      "expected_score_range": {
+        "with_skill": [
+          4,
+          5
+        ],
+        "without_skill": [
+          2,
+          3
+        ]
+      },
+      "notes": "Complex multi-tool scenario: SSH + jc + jq + 1Password + cron. Tests full integration coverage."
+    },
+    {
+      "id": "eval-03",
+      "title": "Parse `ps aux` output to find zombie processes",
+      "prompt": "I need to find all zombie processes on a Linux server using `ps aux` and automatically kill their parent processes. Show me how to do this with jc and jq.",
+      "categories": [
+        "jc",
+        "process-management"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response pipes ps aux through jc --ps",
+          "type": "contains",
+          "keywords": [
+            "jc --ps",
+            "ps aux"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response uses jq to filter for zombie state (stat contains Z or state == zombie)",
+          "type": "contains",
+          "keywords": [
+            "jq",
+            "select",
+            "Z",
+            "zombie",
+            "stat"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response shows how to get ppid (parent PID) from filtered output",
+          "type": "contains",
+          "keywords": [
+            "ppid",
+            "parent"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response acknowledges danger of kill -9 on parent vs safer alternatives",
+          "type": "quality",
+          "keywords": [
+            "kill",
+            "SIGCHLD",
+            "wait",
+            "parent"
+          ]
+        }
+      ],
+      "expected_score_range": {
+        "with_skill": [
+          3,
+          4
+        ],
+        "without_skill": [
+          1,
+          2
+        ]
+      },
+      "notes": "Tests specific jc + jq pattern knowledge for process state filtering"
+    },
+    {
+      "id": "eval-04",
+      "title": "Deploy secrets-injected config without touching disk",
+      "prompt": "I need to deploy a config file to a server that contains database passwords and API keys. The config template exists on disk but the secrets should never be written to disk. How do I inject secrets from 1Password at deploy time?",
+      "categories": [
+        "secrets",
+        "deployment"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response uses `op run` or `op read` with process substitution or env injection",
+          "type": "contains",
+          "keywords": [
+            "op run",
+            "op read",
+            "op://"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response does NOT suggest writing secrets to a temporary file",
+          "type": "security",
+          "must_not_contain": [
+            "/tmp/",
+            "tempfile",
+            "> secret"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response uses op:// reference syntax for secret references",
+          "type": "contains",
+          "keywords": [
+            "op://vault/item/field",
+            "op://"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response mentions secret reference immutability or vault structure",
+          "type": "quality",
+          "keywords": [
+            "vault",
+            "item",
+            "field",
+            "immutable"
+          ]
+        }
+      ],
+      "expected_score_range": {
+        "with_skill": [
+          3,
+          4
+        ],
+        "without_skill": [
+          1,
+          2
+        ]
+      },
+      "notes": "Security-critical test: validates skill enforces secrets-first patterns over disk-based approaches"
+    },
+    {
+      "id": "eval-05",
+      "title": "Build Cherri automation for nightly backup with retry",
+      "prompt": "I want to write a macOS Siri Shortcut that runs a nightly backup from ~/Documents to a remote server. The shortcut should retry 3 times on failure and send a notification on success or failure. Can you help me write this in Cherri?",
+      "categories": [
+        "cherri",
+        "automation"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response provides actual Cherri syntax (func, var, if/while/for blocks)",
+          "type": "contains",
+          "keywords": [
+            "func ",
+            "var ",
+            "while ",
+            "return"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response includes retry loop (while or for with counter)",
+          "type": "contains",
+          "keywords": [
+            "while ",
+            "attempts",
+            "retry",
+            "< 3"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response shows cherri compile command to build shortcut",
+          "type": "contains",
+          "keywords": [
+            "cherri compile",
+            ".shortcut"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response mentions macOS-only limitation or rsync/backup command",
+          "type": "quality",
+          "keywords": [
+            "macOS",
+            "rsync",
+            "Shortcuts.app",
+            "shortcut"
+          ]
+        }
+      ],
+      "expected_score_range": {
+        "with_skill": [
+          3,
+          4
+        ],
+        "without_skill": [
+          0,
+          1
+        ]
+      },
+      "notes": "Cherri is niche — baseline should score very low. Skill provides actual syntax. Highest delta expected."
+    },
+    {
+      "id": "eval-06",
+      "title": "Standardize macOS settings across developer machines",
+      "prompt": "I want to write a script that standardizes macOS settings for all developers joining our team: hide desktop icons, enable autohide dock, set key repeat rate, and disable Spotlight suggestions. What's the best approach?",
+      "categories": [
+        "macos-admin",
+        "team-environment"
+      ],
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Response uses `defaults write` for system preferences",
+          "type": "contains",
+          "keywords": [
+            "defaults write"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Response uses m-cli or similar for dock/Finder control",
+          "type": "optional",
+          "keywords": [
+            "m dock",
+            "m-cli",
+            "m wifi",
+            "m system"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Response mentions restart required for some settings (killall Finder/Dock)",
+          "type": "contains",
+          "keywords": [
+            "killall Finder",
+            "killall Dock",
+            "restart"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Response mentions approval required for accessibility/privacy changes",
+          "type": "quality",
+          "keywords": [
+            "privacy",
+            "accessibility",
+            "approval",
+            "sudo",
+            "System Preferences"
+          ]
+        }
+      ],
+      "expected_score_range": {
+        "with_skill": [
+          3,
+          4
+        ],
+        "without_skill": [
+          2,
+          3
+        ]
+      },
+      "notes": "macOS admin is well-known territory — baseline may score reasonably. Skill adds m-cli and gotchas."
+    }
+  ],
+  "scoring_rubric": {
+    "per_assertion": {
+      "pass": 1,
+      "fail": 0,
+      "partial": 0.5
+    },
+    "max_score_per_case": "number of assertions",
+    "aggregate": {
+      "green": "with_skill score >= expected_score_range[0] AND without_skill score < with_skill",
+      "yellow": "with_skill score in expected_score_range but no improvement over baseline",
+      "red": "with_skill score < expected_score_range[0] OR with_skill score <= without_skill"
+    }
+  },
+  "baseline_comparison_notes": [
+    "Run each case 3 times with and without skill to account for model nondeterminism",
+    "Record median score across runs per case",
+    "Threshold for skill value: median with_skill >= median without_skill + 1.5 points across all cases",
+    "Security assertions are weighted 2x: a single security failure is disqualifying"
+  ]
+}

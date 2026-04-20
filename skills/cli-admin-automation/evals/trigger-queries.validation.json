@@ -1,0 +1,58 @@
+[
+  {
+    "id": 13,
+    "query": "Write a Python script that downloads files from S3",
+    "should_trigger": false,
+    "category": "cloud-services",
+    "reason": "AWS/cloud CLI skill, not CLI admin"
+  },
+  {
+    "id": 14,
+    "query": "How do I use Docker to containerize my application?",
+    "should_trigger": false,
+    "category": "containers",
+    "reason": "Separate container ecosystem"
+  },
+  {
+    "id": 15,
+    "query": "I need to set up a PostgreSQL database locally for development",
+    "should_trigger": false,
+    "category": "databases",
+    "reason": "Database-specific skill, not CLI admin"
+  },
+  {
+    "id": 16,
+    "query": "Can you teach me Git basics and how to commit code?",
+    "should_trigger": false,
+    "category": "version-control",
+    "reason": "Git skill, not CLI admin"
+  },
+  {
+    "id": 17,
+    "query": "What's the difference between HTTP and HTTPS?",
+    "should_trigger": false,
+    "category": "networking-fundamentals",
+    "reason": "General networking knowledge, not CLI admin"
+  },
+  {
+    "id": 18,
+    "query": "I need to validate a JSON file against a schema",
+    "should_trigger": false,
+    "category": "data-validation",
+    "reason": "Data validation/JSON tool, not CLI admin"
+  },
+  {
+    "id": 19,
+    "query": "How do I configure Nginx as a reverse proxy?",
+    "should_trigger": false,
+    "category": "web-servers",
+    "reason": "Web server configuration skill"
+  },
+  {
+    "id": 20,
+    "query": "Can you write unit tests for my Python code?",
+    "should_trigger": false,
+    "category": "testing",
+    "reason": "Testing skill, not CLI admin"
+  }
+]
