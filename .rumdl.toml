@@ -1,7 +1,7 @@
 [global]
 # The skills corpus contains many intentionally long lines and command snippets.
 # Disable strict line-length to keep pre-commit practical for this repository.
-disable = ["MD013", "MD076"]
+disable = ["MD013", "MD036", "MD076"]
 
 # Keep scan scope predictable and fast.
 exclude = ["node_modules", ".git", "dist", "coverage", ".rumdl_cache"]

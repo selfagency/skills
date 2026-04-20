@@ -4,7 +4,10 @@
   "version": "0.1.0",
   "description": "Self Agency's LLM agent skills",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:evals": "vitest run tests/evals.test.ts",
+    "test:skill": "vitest run --reporter=verbose",
     "typecheck": "tsc --noEmit",
     "prepare": "husky || true && pnpx skills-npm --yes",
     "lint:md": "rumdl check --fix . --exclude node_modules",
@@ -38,12 +41,17 @@
   "license": "MIT",
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
+    "@ai-sdk/openai": "^2.0.103",
+    "@langwatch/scenario": "^0.4.10",
+    "ai": "^6.0.168",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "ollama": "^0.6.3",
     "oxfmt": "^0.45.0",
     "oxlint": "^1.60.0",
     "rumdl": "^0.1.74",
     "skills-npm": "^1.1.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.4"
   }
 }
