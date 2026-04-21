@@ -32,6 +32,10 @@
         "should_trigger": true
       },
       {
+        "query": "Configure Claude Code and Copilot hooks to run typecheck and lint/format checks automatically after file edits.",
+        "should_trigger": true
+      },
+      {
         "query": "My CI fails on eslint warnings, fix the GitHub workflow only.",
         "should_trigger": false
       },
@@ -59,6 +63,10 @@
       },
       {
         "query": "Set up GitHub Actions so typecheck runs before lint and format checks, no autofix.",
+        "should_trigger": true
+      },
+      {
+        "query": "I need hook files for Claude Code and Copilot CLI to enforce lint and typecheck policies.",
         "should_trigger": true
       },
       {
@@ -289,6 +297,74 @@
             "autofix.ci",
             "prettier . --write",
             "oxfmt --write"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eval-08",
+      "title": "Claude and Copilot hooks guidance",
+      "prompt": "Add guidance for configuring Claude Code hooks and Copilot hooks so lint/typecheck/format checks run at agent lifecycle points.",
+      "assertions": [
+        {
+          "id": "a1",
+          "description": "Distinguishes Claude and Copilot hook config formats",
+          "type": "contains",
+          "keywords": [
+            ".claude/settings.json",
+            ".github/hooks",
+            "version: 1",
+            "preToolUse",
+            "PreToolUse"
+          ]
+        },
+        {
+          "id": "a1b",
+          "description": "Mentions Copilot payload field names for pre/post tool hooks",
+          "type": "contains",
+          "keywords": [
+            "toolName",
+            "toolArgs"
+          ]
+        },
+        {
+          "id": "a2",
+          "description": "Keeps mode semantics aligned for check vs fix",
+          "type": "contains",
+          "keywords": [
+            "check mode",
+            "fix mode",
+            "tsc --noEmit"
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Separates Copilot CLI/cloud and VS Code hook command fields",
+          "type": "contains",
+          "keywords": [
+            "bash",
+            "powershell",
+            "timeoutSec",
+            "command",
+            "windows"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Covers runtime-specific gotchas: Copilot toolArgs double-encoding and VS Code camelCase field names",
+          "type": "contains",
+          "keywords": [
+            "double",
+            "filePath"
+          ]
+        },
+        {
+          "id": "a5",
+          "description": "Includes permissionDecision deny pattern for at least one runtime",
+          "type": "contains",
+          "keywords": [
+            "permissionDecision",
+            "deny"
           ]
         }
       ]

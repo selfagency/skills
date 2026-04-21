@@ -38,6 +38,7 @@ Always ensure support for **TS, JS, YAML, JSON, Markdown** by combining tools co
 - Read `references/rumdl.md` when user selects Rumdl for Markdown lint/format.
 - Read `references/husky-lint-staged-modes.md` for hook setup, race-safe task ordering, and mode templates.
 - Read `references/tooling-docs.md` when you need authoritative online configuration references for any tool.
+- Read `references/copilot-claude-hooks.md` when the user asks to enforce typecheck/lint/format via agent hooks in Claude Code, GitHub Copilot CLI/cloud, or VS Code Copilot hooks.
 
 ## Workflow
 
@@ -53,8 +54,12 @@ Always ensure support for **TS, JS, YAML, JSON, Markdown** by combining tools co
 5. Create/update config files.
 6. Configure Husky and lint-staged for the selected mode, with pre-commit typecheck before lint-staged.
 7. If requested, configure GitHub Actions CI for typecheck + lint/format checks.
-8. Validate by running lint/format/typecheck check commands.
-9. Report exactly what changed and how to switch modes later.
+8. If requested, configure agent hooks for Claude Code and/or Copilot to enforce typecheck/lint/format at agent lifecycle events.
+   - Select runtime target explicitly: Claude Code, Copilot CLI/cloud, VS Code Copilot hooks (Preview), or multiple.
+   - If Copilot is selected, clarify whether target is CLI/cloud hooks schema, VS Code hooks schema, or both.
+   - Use runtime-native schema/event names (do not mix PascalCase and lowerCamelCase events).
+9. Validate by running lint/format/typecheck check commands.
+10. Report exactly what changed and how to switch modes later.
 
 ## Required questions
 
@@ -71,6 +76,11 @@ Ask these before mutating files:
    - `check` (block commit on issues)
    - `fix` (auto-fix and stage updated files)
 6. **Scope preference** (if ambiguous): staged files only (recommended) or whole-repo commands in pre-commit (slower).
+7. **Agent hook target** (optional): none, Claude Code, Copilot CLI/cloud, VS Code Copilot hooks, or multiple?
+8. **Copilot runtime scope** (if Copilot hooks enabled): CLI/cloud schema, VS Code schema, or both?
+9. **Hook enforcement style** (if hooks enabled):
+   - post-edit checks only (`PostToolUse`), or
+   - include pre-tool deny/ask controls (`PreToolUse`) for policy enforcement?
 
 ## TypeScript setup and tsconfig
 
@@ -99,6 +109,29 @@ Ask these before mutating files:
 - For Oxc in CI, use check commands only (`oxlint`, `oxfmt --check`).
 - For Prettier in CI, use `prettier --check`, not `--write`.
 - For Rumdl in CI, use `rumdl check .` or the official GitHub Action in check mode only.
+
+## Agent hooks for Claude and Copilot (optional)
+
+- Use this only when user explicitly asks to enforce checks through agent hooks.
+- Load `references/copilot-claude-hooks.md` before writing hook files.
+- Always state which runtime config is being produced:
+  - Claude Code (`.claude/settings*.json`, PascalCase events)
+  - Copilot CLI/cloud (`.github/hooks/*.json`, `version: 1`, lowerCamelCase events)
+  - VS Code Copilot hooks (Preview; validate behavior with hook logs)
+- For Copilot guidance, keep CLI/cloud and VS Code command schemas separate:
+  - CLI/cloud: `bash`/`powershell` + `timeoutSec`
+  - VS Code: `command` (+ optional `windows`/`linux`/`osx`) + `timeout`
+- Keep hook commands deterministic and non-interactive.
+- Prefer repository-local scripts under `scripts/` for reusable logic, then call those scripts from hook configs.
+- Enforce check vs fix semantics consistently with selected mode:
+  - `check` mode: non-mutating commands only (`--check`, no `--write` / `--fix` unless user asks to change behavior)
+  - `fix` mode: allow mutating format/fix commands where user requested
+- Preserve stack boundaries:
+  - Oxc: `oxlint` + `oxfmt` roles unchanged
+  - Biome: `biome ci` for CI checks; `biome check` / `biome check --write` by mode
+  - ESLint+Prettier: keep ESLint-before-Prettier ordering on overlapping JS/TS files
+  - Rumdl override: Markdown handled by Rumdl when selected
+- For performance, scope hook actions to changed file(s) when platform supports per-tool file metadata.
 
 ## Coverage rules by toolchain
 

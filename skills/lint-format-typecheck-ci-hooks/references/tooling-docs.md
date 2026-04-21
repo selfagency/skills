@@ -51,3 +51,12 @@ Use this file as a quick jump table when you need authoritative settings or CLI 
 - [Pre-commit integration](https://rumdl.dev/usage/pre-commit/)
 - [CI/CD integration](https://rumdl.dev/usage/ci-cd/)
 - [Global settings reference](https://rumdl.dev/global-settings/)
+
+## Claude + Copilot hooks
+
+- [Copilot CLI hooks how-to](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/use-hooks)
+- [Copilot cloud agent hooks how-to](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/use-hooks)
+- [Copilot hooks configuration reference](https://docs.github.com/en/copilot/reference/hooks-configuration)
+- [VS Code Copilot hooks](https://code.visualstudio.com/docs/copilot/customization/hooks)
+- [Claude Code hooks guide](https://code.claude.com/docs/en/hooks-guide)
+- [Claude Code hooks reference](https://code.claude.com/docs/en/hooks)
