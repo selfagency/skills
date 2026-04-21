@@ -1,6 +1,6 @@
 ---
 name: lint-format-typecheck-ci-hooks
-description: Install and configure JavaScript/TypeScript typechecking, linting, formatting, Git pre-commit hooks, and GitHub Actions CI checks. Use this skill when the user asks to set up or migrate code quality tooling with Husky and lint-staged, choose between Oxc (oxlint+oxfmt), Biome, or ESLint+Prettier, optionally select Rumdl as Markdown linter/formatter, add `tsc --noEmit` typechecking, configure GitHub Actions CI for check-only validation, copy existing config files, generate new configs, or enforce either check-only or auto-fix pre-commit behavior for TS/JS/YAML/JSON/Markdown files.
+description: Install and configure JavaScript/TypeScript typechecking, linting, formatting, Git pre-commit hooks, and GitHub Actions CI checks. Use this skill when the user asks to set up or migrate code quality tooling with Husky and lint-staged, choose between Oxc (oxlint+oxfmt), Biome, or ESLint+Prettier, optionally select Rumdl as Markdown linter/formatter, add `tsc --noEmit` typechecking, configure GitHub Actions CI for check-only validation, copy existing config files, initialize configs with official tool commands, or enforce either check-only or auto-fix pre-commit behavior for TS/JS/YAML/JSON/Markdown files.
 ---
 
 # Lint + Format + Typecheck + CI + Hooks Setup
@@ -26,7 +26,7 @@ Always ensure support for **TS, JS, YAML, JSON, Markdown** by combining tools co
 
 - Default package manager: detect from lockfile (`pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`, `bun.lockb`).
 - Default hook manager: Husky + lint-staged.
-- Default operation: prefer reusing existing configs if user provides paths; otherwise generate minimal safe configs.
+- Default operation: prefer reusing existing configs if user provides paths; otherwise initialize configs with official tool-native commands before any manual scaffolding.
 
 ## Load references on demand
 
@@ -51,7 +51,11 @@ Always ensure support for **TS, JS, YAML, JSON, Markdown** by combining tools co
    - hook mode (`check`, `fix`)
 3. If `copy-existing`, ask for config file paths and validate they exist.
 4. Install selected dependencies and add or update package scripts.
-5. Create/update config files.
+5. Create/update config files using tool-native init commands first.
+   - Oxc: `oxlint --init` and `oxfmt --init`
+   - Biome: `biome init`
+   - ESLint: `eslint --init` (or `npm init @eslint/config@latest`)
+   - Prettier has no official init CLI; if needed, scaffold from official docs examples only.
 6. Configure Husky and lint-staged for the selected mode, with pre-commit typecheck before lint-staged.
 7. If requested, configure GitHub Actions CI for typecheck + lint/format checks.
 8. If requested, configure agent hooks for Claude Code and/or Copilot to enforce typecheck/lint/format at agent lifecycle events.
@@ -71,7 +75,7 @@ Ask these before mutating files:
    - `leave-as-is`
    - `install+init-tsconfig`
    - `install+use-existing-tsconfig`
-4. **Config source**: Copy existing config files or generate new ones?
+4. **Config source**: Copy existing config files, initialize via tool-native commands, or (last resort) manually scaffold from official docs templates?
 5. **Pre-commit mode**:
    - `check` (block commit on issues)
    - `fix` (auto-fix and stage updated files)
@@ -83,6 +87,14 @@ Ask these before mutating files:
    - include pre-tool deny/ask controls (`PreToolUse`) for policy enforcement?
 
 ## TypeScript setup and tsconfig
+
+## Config generation policy (hard requirement)
+
+- Prefer tool-native initialization commands whenever available.
+- Do **not** invent custom config schemas when an official initializer exists.
+- Do **not** create blank placeholder config objects (for example, `{}`) as a default strategy.
+- If a tool lacks an initializer (for example, Prettier), use the official documentation pattern and keep the config minimal.
+- If initialization is interactive (for example, ESLint), ask user preference and use the official non-interactive alternative only when needed.
 
 - Do not install TypeScript or initialize `tsconfig.json` unless the user explicitly asks.
 - If user initiates TypeScript setup:
@@ -184,7 +196,7 @@ Run helpers non-interactively with flags only.
 ## Completion checklist
 
 - Dependencies installed for selected stack.
-- Config files copied or generated.
+- Config files copied or initialized with tool-native commands (no blank placeholder configs as default output).
 - `package.json` scripts updated.
 - Husky initialized and `.husky/pre-commit` present.
 - Pre-commit hook runs `typecheck` before `lint-staged`.

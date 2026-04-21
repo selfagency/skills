@@ -14,13 +14,22 @@ Use this when toolchain is **ESLint + Prettier**.
   - `husky`
   - `lint-staged`
 
+## Initialize config (official first)
+
+- ESLint: run one of the official initializers:
+  - `npx eslint --init`
+  - or `npm init @eslint/config@latest`
+- Prettier has no official init CLI command.
+  - Use official docs templates/examples when creating `.prettierrc`.
+  - Do not generate blank placeholder configs such as `{}` as a default.
+
 ## Config files
 
-- ESLint flat config: `eslint.config.mjs`
-- Prettier config: `.prettierrc`
+- ESLint flat config: `eslint.config.mjs` (from initializer output)
+- Prettier config: `.prettierrc` (from official template, if required)
 - Prettier ignore: `.prettierignore`
 
-Minimal ESLint flat config combines:
+If manual adjustment is needed, keep ESLint flat config minimal and based on initializer output. Typical baseline combines:
 
 - `@eslint/js` recommended
 - `typescript-eslint` recommended

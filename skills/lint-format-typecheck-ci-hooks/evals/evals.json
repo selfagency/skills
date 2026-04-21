@@ -106,6 +106,15 @@
           ]
         },
         {
+          "id": "a2c",
+          "description": "Uses official Oxc init commands when creating new config",
+          "type": "contains",
+          "keywords": [
+            "oxlint --init",
+            "oxfmt --init"
+          ]
+        },
+        {
           "id": "a2b",
           "description": "Runs typecheck before lint-staged in pre-commit flow",
           "type": "contains",
@@ -148,6 +157,14 @@
             "--files-ignore-unknown=true",
             "--no-errors-on-unmatched"
           ]
+        },
+        {
+          "id": "a3",
+          "description": "Uses Biome initializer when config generation is needed",
+          "type": "contains",
+          "keywords": [
+            "biome init"
+          ]
         }
       ]
     },
@@ -172,6 +189,22 @@
           "must_not_contain": [
             "\"*\": \"prettier --write\"",
             "\"*.ts\": \"eslint --fix\""
+          ]
+        },
+        {
+          "id": "a3",
+          "description": "Prefers official ESLint initializer over invented config scaffolding",
+          "type": "contains",
+          "keywords": [
+            "eslint --init"
+          ]
+        },
+        {
+          "id": "a4",
+          "description": "Avoids blank placeholder configs",
+          "type": "contains",
+          "must_not_contain": [
+            "{}"
           ]
         }
       ]

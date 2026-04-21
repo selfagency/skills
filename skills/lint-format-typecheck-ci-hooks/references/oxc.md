@@ -29,6 +29,8 @@ Generate defaults if missing:
 - `oxlint --init`
 - `oxfmt --init`
 
+Do not create blank placeholder config files when these initializers are available.
+
 ## lint-staged templates
 
 ### check mode

@@ -4,10 +4,10 @@ import { Ollama } from 'ollama';
 const ollama = new Ollama({ host: 'http://localhost:11434' });
 
 /**
- * Model to use for judging — granite3.2:8b has strong instruction following.
- * Falls back to qwen2.5-coder:7b.
+ * Model to use for judging — qwen3.5:2b has strong instruction following.
+ * Falls back to qwen2.5:1.5b.
  */
-const JUDGE_MODEL = 'granite3.2:8b';
+const JUDGE_MODEL = 'qwen3.5:2b';
 
 const verdictSchema = {
   type: 'object',

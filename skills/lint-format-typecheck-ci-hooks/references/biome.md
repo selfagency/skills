@@ -16,6 +16,8 @@ Pin Biome version where possible.
 - `npx @biomejs/biome init`
 - Config file: `biome.json`
 
+Do not replace initializer output with blank placeholder config files.
+
 ## Scripts
 
 Add/update scripts:
