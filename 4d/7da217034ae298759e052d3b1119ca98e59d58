@@ -1,0 +1,39 @@
+skills/lint-format-typecheck-ci-hooks/references/eslint-prettier.md
+  h_5cf1e2c1161853 17-25,28-29,32
+skills/lint-format-typecheck-ci-hooks/evals/evals.json
+  h_5cf1e2c1161853 109-116,160-166,193-207
+skills/lint-format-typecheck-ci-hooks/SKILL.md
+  h_5cf1e2c1161853 3,29,54-58,78,91-98,199
+skills/lint-format-typecheck-ci-hooks/references/biome.md
+  h_5cf1e2c1161853 19-20
+tests/helpers/ollama.ts
+  9a09d63b79cb461c 7
+  h_5cf1e2c1161853 8,10
+skills/lint-format-typecheck-ci-hooks/references/oxc.md
+  h_5cf1e2c1161853 32-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "4d7da217034ae298759e052d3b1119ca98e59d58",
+  "prompts": {
+    "9a09d63b79cb461c": {
+      "agent_id": {
+        "tool": "github-copilot-tab",
+        "id": "ai_tab-1776738653354",
+        "model": "default"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
