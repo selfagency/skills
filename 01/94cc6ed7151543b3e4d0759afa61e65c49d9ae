@@ -1,0 +1,20 @@
+skills/lint-format-typecheck-ci-hooks/evals/evals.json
+  h_5cf1e2c1161853 35-37,68-69,303-337,339-368
+skills/lint-format-typecheck-ci-hooks/references/tooling-docs.md
+  h_5cf1e2c1161853 54-62
+skills/lint-format-typecheck-ci-hooks/references/copilot-claude-hooks.md
+  h_5cf1e2c1161853 1-318
+skills/lint-format-typecheck-ci-hooks/SKILL.md
+  h_5cf1e2c1161853 41,57-62,79-83,113-134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "0194cc6ed7151543b3e4d0759afa61e65c49d9ae",
+  "prompts": {},
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
